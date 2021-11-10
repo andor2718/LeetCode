@@ -5,8 +5,6 @@ class Solution:
         char_frequencies = dict()
         for char in s:
             char_frequencies[char] = char_frequencies.get(char, 0) + 1
-        frequency_char_pairs = list()
-        for char, freq in char_frequencies.items():
-            frequency_char_pairs.append((freq, char))
-        frequency_char_pairs.sort(reverse=True)
-        return ''.join([char * freq for freq, char in frequency_char_pairs])
+        char_frequencies = list(char_frequencies.items())
+        char_frequencies.sort(reverse=True, key=lambda x: x[1])
+        return ''.join([char * freq for char, freq in char_frequencies])
