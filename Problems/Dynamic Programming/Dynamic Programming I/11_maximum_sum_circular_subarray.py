@@ -16,7 +16,7 @@ def greatest_subarray_sum(nums: list[int], negative: bool = False) -> int:
 class Solution:
     def maxSubarraySumCircular(self, nums: list[int]) -> int:
         max_without_wrap = greatest_subarray_sum(nums)
-        if max(nums) < 0:  # All nums are negative
+        if max(nums) <= 0:
             return max_without_wrap
         min_without_wrap = greatest_subarray_sum(nums, negative=True)
         max_with_wrap = sum(nums) - min_without_wrap
