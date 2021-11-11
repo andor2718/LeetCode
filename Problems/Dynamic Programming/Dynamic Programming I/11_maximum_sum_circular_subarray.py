@@ -2,7 +2,7 @@
 
 def greatest_subarray_sum(nums: list[int], inverse_mode: bool = False) -> int:
     """
-    Find the greatest subarray sum in a list of integer numbers,
+    Find the greatest subarray sum in nums,
     or find the smallest subarray sum using the inverse_mode.
     """
 
