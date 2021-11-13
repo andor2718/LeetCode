@@ -3,9 +3,8 @@
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
         max_profit = 0
-        last_min_price = prices[0]
-        for price in prices[1:]:
-            if price > last_min_price:
-                max_profit += price - last_min_price
-            last_min_price = price
+        for idx in range(1, len(prices)):
+            curr_profit = prices[idx] - prices[idx - 1]
+            if curr_profit > 0:
+                max_profit += curr_profit
         return max_profit
