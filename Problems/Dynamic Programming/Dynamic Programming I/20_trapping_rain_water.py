@@ -10,15 +10,16 @@ class Solution:
         for idx in range(1, len(height) - 1):
             if height[idx] < max_left:
                 held_water[idx] = max_left - height[idx]
-            max_left = max(max_left, height[idx])
+            else:
+                max_left = height[idx]
         # Scan heights from right to left
         max_right = height[-1]
         for idx in reversed(range(1, len(height) - 1)):
             if height[idx] < max_right:
                 held_water[idx] = min(held_water[idx], max_right - height[idx])
             else:
+                max_right = height[idx]
                 held_water[idx] = 0
             water += held_water[idx]
-            max_right = max(max_right, height[idx])
         # Answer computed
         return water
