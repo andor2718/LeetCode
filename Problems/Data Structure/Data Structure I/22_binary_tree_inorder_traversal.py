@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/binary-tree-inorder-traversal/
 
+import enum
 from typing import Optional
-from enum import Enum, auto
 
 
 # Definition for a binary tree node.
@@ -12,19 +12,15 @@ class TreeNode:
         self.right = right
 
 
-class Operations(Enum):
-    PROCESS_NODE = auto()
-    STORE_VALUE = auto()
+class Operations(enum.Enum):
+    PROCESS_NODE = enum.auto()
+    STORE_VALUE = enum.auto()
 
 
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> list[int]:
-        if not root:
-            return []
         result = list()
-        stack = [(Operations.PROCESS_NODE, root.right),
-                 (Operations.STORE_VALUE, root),
-                 (Operations.PROCESS_NODE, root.left)]
+        stack = [(Operations.PROCESS_NODE, root)]
         while stack:
             op, node = stack.pop()
             if not node:
