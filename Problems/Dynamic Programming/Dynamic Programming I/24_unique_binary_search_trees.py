@@ -9,8 +9,7 @@ class Solution:
         for idx in range(2, n + 1):
             nodes_without_root = idx - 1
             unique_trees = 0
-            for i in range(nodes_without_root + 1):
-                left_nodes = i
+            for left_nodes in range(nodes_without_root + 1):
                 right_nodes = nodes_without_root - left_nodes
                 unique_trees += nums[left_nodes] * nums[right_nodes]
             nums[idx] = unique_trees
