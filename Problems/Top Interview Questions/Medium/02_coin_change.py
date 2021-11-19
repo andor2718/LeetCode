@@ -2,8 +2,6 @@
 
 class Solution:
     def coinChange(self, coins: list[int], amount: int) -> int:
-        if amount == 0:
-            return 0
         inf = float('inf')
         min_amounts = [inf for _ in range(amount + 1)]
         min_amounts[0] = 0
