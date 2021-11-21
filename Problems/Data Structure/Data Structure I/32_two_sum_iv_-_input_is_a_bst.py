@@ -11,18 +11,29 @@ class TreeNode:
         self.right = right
 
 
-def _find_target(root: Optional[TreeNode], k: int, values: list[int]) -> bool:
-    if not root:
+def _contains(node: Optional[TreeNode], val: int) -> bool:
+    if not node:
         return False
-    for val in values:
-        if val + root.val == k:
-            return True
-    values.append(root.val)
-    return (_find_target(root.left, k, values)
-            or _find_target(root.right, k, values))
+    if node.val == val:
+        return True
+    elif node.val < val:
+        return _contains(node.right, val)
+    else:
+        return _contains(node.left, val)
+
+
+def _find_target(node: Optional[TreeNode], root: TreeNode, k: int) -> bool:
+    if not node:
+        return False
+    diff = k - node.val
+    if diff != node.val and _contains(root, diff):
+        return True
+    return (_find_target(node.left, root, k)
+            or _find_target(node.right, root, k))
 
 
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
-        values = list()
-        return _find_target(root, k, values)
+        if not root:
+            return False
+        return _find_target(root, root, k)
