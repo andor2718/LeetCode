@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/validate-binary-search-tree/
 
+from __future__ import annotations
+
 from typing import Optional
 
 
@@ -11,19 +13,20 @@ class TreeNode:
         self.right = right
 
 
-def get_values_in_order(root: Optional[TreeNode], values: list[int]) -> None:
-    if not root:
-        return
-    get_values_in_order(root.left, values)
-    values.append(root.val)
-    get_values_in_order(root.right, values)
+def _is_valid_bst(
+        node: Optional[TreeNode], min_val: int | float, max_val: int | float
+) -> bool:
+    if not node:
+        return True
+    if not (min_val < node.val < max_val):
+        return False
+    return (_is_valid_bst(node.left, min_val, node.val)
+            and _is_valid_bst(node.right, node.val, max_val))
 
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        values = list()
-        get_values_in_order(root, values)
-        for i in range(1, len(values)):
-            if values[i - 1] >= values[i]:
-                return False
-        return True
+        if not root:
+            return True
+        return (_is_valid_bst(root.left, float('-inf'), root.val)
+                and _is_valid_bst(root.right, root.val, float('inf')))
