@@ -2,12 +2,14 @@
 
 class Solution:
     def lengthOfLIS(self, nums: list[int]) -> int:
-        stacks = [[nums[0]]]
+        # Patience sorting-like approach, but keeping track
+        # only of the topmost element at each stack.
+        stack_tops = [nums[0]]
         for num in nums[1:]:
-            for stack in stacks:
-                if stack[-1] >= num:
-                    stack.append(num)
+            for idx in range(len(stack_tops)):
+                if stack_tops[idx] >= num:
+                    stack_tops[idx] = num
                     break
             else:
-                stacks.append([num])
-        return len(stacks)
+                stack_tops.append(num)
+        return len(stack_tops)
