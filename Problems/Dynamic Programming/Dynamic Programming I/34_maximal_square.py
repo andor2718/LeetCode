@@ -2,7 +2,7 @@
 
 class Solution:
     def maximalSquare(self, matrix: list[list[str]]) -> int:
-        max_square = 0
+        max_square_side = 0
         matrix = [list(map(int, row)) for row in matrix]  # Convert str to int
         rows = len(matrix)
         cols = len(matrix[0])
@@ -14,5 +14,5 @@ class Solution:
                     diagonal_top_left = (
                         matrix[row - 1][col - 1] if row > 0 and col > 0 else 0)
                     matrix[row][col] += min(top, left, diagonal_top_left)
-                    max_square = max(max_square, matrix[row][col])
-        return max_square * max_square
+                    max_square_side = max(max_square_side, matrix[row][col])
+        return max_square_side * max_square_side
