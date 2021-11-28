@@ -5,12 +5,19 @@ class Solution:
         s = s.split()
         if len(pattern) != len(s):
             return False
-        char_to_idx = dict()
-        word_to_idx = dict()
+        char_to_word = dict()
+        reserved_words = set()
         idx = 0
         while idx < len(pattern):  # Or len(s), since they are equal.
             char, word = pattern[idx], s[idx]
-            char_to_idx[char] = char_to_idx.get(char, []) + [idx]
-            word_to_idx[word] = word_to_idx.get(word, []) + [idx]
+            if char not in char_to_word:
+                if word not in reserved_words:
+                    char_to_word[char] = word
+                    reserved_words.add(word)
+                else:
+                    return False
+            else:
+                if char_to_word[char] != word:
+                    return False
             idx += 1
-        return list(char_to_idx.values()) == list(word_to_idx.values())
+        return True
