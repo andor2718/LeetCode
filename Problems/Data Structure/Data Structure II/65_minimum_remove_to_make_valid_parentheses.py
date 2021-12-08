@@ -14,7 +14,7 @@ class Solution:
                     unclosed_open_parentheses_indexes.pop()
         for idx in unclosed_open_parentheses_indexes:
             indexes_to_remove.append(idx)
-        # NOTE: Our construction ensures that indexes_to_remove is sorted!
-        for idx in reversed(indexes_to_remove):
-            s = f'{s[:idx]}{s[idx + 1:]}'
-        return s
+        s = list(s)
+        for idx in indexes_to_remove:
+            s[idx] = ''
+        return ''.join(s)
