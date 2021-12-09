@@ -39,15 +39,14 @@ class Codec:
         root = TreeNode(val=int(vals[0]))
         nodes = deque([root])
         vals_idx = 1
-        while nodes:
+        while nodes and vals_idx != len(vals):
             curr_node = nodes.popleft()
-            if vals_idx < len(vals):
-                left_val = vals[vals_idx]
-                vals_idx += 1
-                if left_val != 'x':
-                    curr_node.left = TreeNode(val=int(left_val))
-                    nodes.append(curr_node.left)
-            if vals_idx < len(vals):
+            left_val = vals[vals_idx]
+            vals_idx += 1
+            if left_val != 'x':
+                curr_node.left = TreeNode(val=int(left_val))
+                nodes.append(curr_node.left)
+            if vals_idx != len(vals):
                 right_val = vals[vals_idx]
                 vals_idx += 1
                 if right_val != 'x':
