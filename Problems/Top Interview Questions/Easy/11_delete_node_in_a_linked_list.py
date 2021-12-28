@@ -13,10 +13,4 @@ class Solution:
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
-        curr_node = node
-        next_node = curr_node.next
-        while next_node.next:
-            curr_node.val = next_node.val
-            curr_node, next_node = next_node, next_node.next
-        curr_node.val = next_node.val
-        curr_node.next = None
+        node.val, node.next = node.next.val, node.next.next
