@@ -9,7 +9,7 @@ class Solution:
         """
         if n <= 0:
             return False
-        if (n & (n - 1)) != 0:
+        if n & (n - 1) != 0:
             return False
         bitmask = int(b'01' * 16, 2)  # We need no more than 32 bits to check.
         return n == n & bitmask
