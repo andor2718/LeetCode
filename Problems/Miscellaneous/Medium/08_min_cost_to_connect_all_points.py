@@ -6,7 +6,7 @@ class DSU:
 
     def _find(self, idx: int) -> int:
         path = list()
-        while self.entries[idx] > 0:
+        while self.entries[idx] >= 0:
             path.append(idx)
             idx = self.entries[idx]
         representative = idx
