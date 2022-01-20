@@ -5,13 +5,14 @@ class DSU:
         self.entries = [-1 for _ in range(item_cnt)]
 
     def _find(self, idx: int) -> int:
-        path = list()
-        while self.entries[idx] >= 0:
-            path.append(idx)
-            idx = self.entries[idx]
-        representative = idx
-        for idx in path:  # Path compression
-            self.entries[idx] = representative
+        seeker = idx
+        while self.entries[seeker] >= 0:
+            seeker = self.entries[seeker]
+        representative, seeker = seeker, idx
+        while seeker != representative:  # Path compression
+            seeker_next = self.entries[seeker]
+            self.entries[seeker] = representative
+            seeker = seeker_next
         return representative
 
     def are_in_same_set(self, item_1: int, item_2: int) -> bool:
