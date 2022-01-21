@@ -7,7 +7,8 @@ def check_arithmetic_subarray(
         return True
     # If this is reached, the length of the subarray is at least 3
     subarray = [nums[idx] for idx in range(left_idx, right_idx + 1)]
-    subarray.sort()  # If a subarray is arithmetic, it MUST be sorted!
+    # If a permutation of the subarray is arithmetic, it MUST be sorted!
+    subarray.sort()
     diff = subarray[1] - subarray[0]
     for idx in range(2, len(subarray)):
         if subarray[idx] - subarray[idx - 1] != diff:
