@@ -34,7 +34,7 @@ class NumArray:
         return self._get_sum(right) - self._get_sum(left - 1)
 
     @staticmethod
-    def _get_rsb(num: int):
+    def _get_rsb(num: int) -> int:
         return -num & num
 
     @staticmethod
