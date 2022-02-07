@@ -2,11 +2,12 @@
 
 class Solution:
     def removeDuplicates(self, nums: list[int]) -> int:
+        max_repetitions = 2
         act_num = nums[0]
         curr_len = curr_idx = lookahead_idx = 1
         while lookahead_idx != len(nums):
             if nums[lookahead_idx] == act_num:
-                if curr_len < 2:
+                if curr_len < max_repetitions:
                     nums[curr_idx] = nums[lookahead_idx]
                     curr_idx += 1
                     curr_len += 1
