@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
 
 class Entry:
-    def __init__(self, num, idx):
+    def __init__(self, num: int, idx: int):
         self.num = num
         self.idx = idx
 
