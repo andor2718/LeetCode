@@ -5,12 +5,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        colors = [0, 1, 2]
-        color_counts = {color: 0 for color in colors}
-        for color in nums:
-            color_counts[color] += 1
-        idx = 0
-        for color in colors:
-            for _ in range(color_counts[color]):
-                nums[idx] = color
-                idx += 1
+        pivot = 1
+        smaller, equal, greater = 0, 0, len(nums) - 1
+        while equal <= greater:
+            curr_num = nums[equal]
+            if curr_num == pivot:
+                equal += 1
+            elif curr_num < pivot:
+                nums[smaller], nums[equal] = nums[equal], nums[smaller]
+                smaller, equal = smaller + 1, equal + 1
+            else:
+                nums[equal], nums[greater] = nums[greater], nums[equal]
+                greater -= 1
