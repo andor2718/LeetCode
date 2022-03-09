@@ -1,10 +1,11 @@
 # https://leetcode.com/problems/sort-an-array/
 
-from random import randrange
+import random
 
 
 class Solution:
     def sortArray(self, nums: list[int]) -> list[int]:
+
         def _partition(low: int, high: int, pivot: int) -> tuple[int, int]:
             smaller, equal, greater = low, low, high
             while equal <= greater:
@@ -20,8 +21,8 @@ class Solution:
             return smaller - 1, equal
 
         def _quick_sort(low: int, high: int) -> None:
-            while high > low:
-                pivot = nums[randrange(low, high)]
+            while low < high:
+                pivot = nums[random.randint(low, high)]
                 left, right = _partition(low, high, pivot)
                 if left - low <= high - right:
                     _quick_sort(low, left)
