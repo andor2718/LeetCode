@@ -1,30 +1,12 @@
 # https://leetcode.com/problems/valid-parentheses/
 
-def bracket_pair_matches(open_bracket, close_bracket):
-    if open_bracket == '(':
-        return close_bracket == ')'
-    elif open_bracket == '[':
-        return close_bracket == ']'
-    else:
-        return close_bracket == '}'
-
-
-def is_opener_bracket(bracket):
-    return bracket in {'(', '[', '{'}
-
-
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack = list()
+        open_to_close = {'(': ')', '{': '}', '[': ']'}
+        close_stack = list()
         for bracket in s:
-            if is_opener_bracket(bracket):
-                stack.append(bracket)
-            else:
-                close_bracket = bracket
-                try:
-                    open_bracket = stack.pop()
-                    if not bracket_pair_matches(open_bracket, close_bracket):
-                        return False
-                except IndexError:
-                    return False
-        return len(stack) == 0
+            if bracket in open_to_close:
+                close_stack.append(open_to_close[bracket])
+            elif not close_stack or close_stack.pop() != bracket:
+                return False
+        return len(close_stack) == 0
