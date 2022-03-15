@@ -2,19 +2,19 @@
 
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        indexes_to_remove = list()
+        indexes_to_remove = set()
         unclosed_open_parentheses_indexes = list()
         for idx, char in enumerate(s):
             if char == '(':
                 unclosed_open_parentheses_indexes.append(idx)
             elif char == ')':
-                if not unclosed_open_parentheses_indexes:
-                    indexes_to_remove.append(idx)
-                else:
+                if unclosed_open_parentheses_indexes:
                     unclosed_open_parentheses_indexes.pop()
-        for idx in unclosed_open_parentheses_indexes:
-            indexes_to_remove.append(idx)
-        s = list(s)
-        for idx in indexes_to_remove:
-            s[idx] = ''
-        return ''.join(s)
+                else:
+                    indexes_to_remove.add(idx)
+        indexes_to_remove.update(unclosed_open_parentheses_indexes)
+        result = list()
+        for idx, char in enumerate(s):
+            if idx not in indexes_to_remove:
+                result.append(char)
+        return ''.join(result)
