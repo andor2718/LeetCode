@@ -17,8 +17,8 @@ class Solution:
                         top_rotations += 1
             return min(top_rotations, bottom_rotations)
 
-        nums = [i for i in range(1, 6 + 1)]
+        candidate_nums = {tops[0], bottoms[0]}
         min_rotations = float('inf')
-        for num in nums:
+        for num in candidate_nums:
             min_rotations = min(min_rotations, _get_min_rotations_for_num(num))
         return min_rotations if min_rotations != float('inf') else -1
